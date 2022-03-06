@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "LittleFS.h"
+#define ESP Serial1
 
 /*
  * Functions
@@ -97,4 +98,110 @@ void serveWebsite(
     return;
   }
   server.send(httpStatus(status), F(type), httpBuildStatus(object));
+}
+
+/**
+ * @brief Set the Cookie object
+ *
+ * @param cookies
+ * @version 0.1
+ * @author Ryan Samaeian (ry.samaeian@gmail.com)
+ * @date 2022-03-06
+ * @copyright Copyright (c) 2022
+ */
+void setCookie(object cookies[])
+{
+  for (int i = 0; i < sizeof(object) / sizeof(object[0]); i++)
+  {
+    for (int i = 0; i < sizeof(object[i]) / sizeof(object[i][0]); i++)
+    {
+      server.sendHeader("Set-cookie", String(object[i] + "=" + object[i][++j]));
+    }
+  }
+}
+
+/**
+ * @brief Get the Cookie object
+ * 
+ * @return String 
+ * @version 0.1
+ * @author Ryan Samaeian (ry.samaeian@gmail.com)
+ * @date 2022-03-06
+ * @copyright Copyright (c) 2022
+ */
+String getCookie(name)
+{
+  if (server.hasHeader("Cookie"))
+  {
+    char *cookie;
+    char *remaining[] = server.header("Cookie");
+
+    while (cookie = strtok_r(remaining, ";", &remaining))
+    {
+      if (cookie.indexOf(name) != -1)
+      {
+        return cookie;
+      }
+    }
+  }
+}
+
+void sha256()
+{
+  // Will do later
+}
+
+void startTimer()
+{
+  // help needed !
+}
+
+/*
+ * Serial Communication
+ * Used to communicate between the ESP32-Cam and Arduino Due
+ */
+
+// BEING HEAVILY WORKED ON!
+void serialListen()
+{
+  static boolean recvInProgress = false;
+  static byte ndx = 0;
+  char startMarker = '<';
+  char endMarker = '>';
+  char rc;
+
+  while (Serial.available() > 0 && newData == false)
+  {
+    rc = Serial.read();
+
+    if (recvInProgress == true)
+    {
+      if (rc != endMarker)
+      {
+        receivedChars[ndx] = rc;
+        ndx++;
+        if (ndx >= numChars)
+        {
+          ndx = numChars - 1;
+        }
+      }
+      else
+      {
+        receivedChars[ndx] = '\0'; // terminate the string
+        recvInProgress = false;
+        ndx = 0;
+        newData = true;
+      }
+    }
+
+    else if (rc == startMarker)
+    {
+      recvInProgress = true;
+    }
+  }
+}
+
+void serialPrint(value)
+{
+  ESP.println(value);
 }
