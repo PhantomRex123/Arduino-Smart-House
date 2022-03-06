@@ -46,10 +46,10 @@ Misc options. These are well coded to provide awesome results
 
 ## Author
 
-**Ryan Sam.**
-Role: Creator
-Discord: PhantomRex123#5194
-Email: Ask me in discord. Don't spam :)
+**Ryan Sam.**<br>
+Role: Creator<br>
+Discord: PhantomRex123#5194<br>
+Email: ry.samaeian@gmail.com<br>
 
 ## 🤝 Support
 

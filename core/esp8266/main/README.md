@@ -2,6 +2,8 @@
 ## How to run?
 
 > You must upload the code on the esp8266 its self. THIS DOESN'T GO ON THE ARDUINO ITSSELF
+> Also Data includes all HTML/CSS files and folders.
+
 
 Run the following commands on linux/osx. in this directory
 ```
