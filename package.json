@@ -24,5 +24,8 @@
     "node-sass": "^3.4.2",
     "postcss": "^5.0.16",
     "postcss-cli": "^2.5.1"
-  }
+  } ,
+  "browserslist": [
+    "last 20 version, not dead"
+  ]
 }
