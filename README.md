@@ -24,6 +24,25 @@ One of the most important modules
 ### Microphone, plant moisture
 Misc options. These are well coded to provide awesome results
 
+## How to install and run
+```
+git clone https://github.com/PhantomRex123/Arduino-Smart-House/ --depth 1
+cd Arduino-Smart-House
+npm install 
+```
+
+### How to update?
+```
+git pull origin master
+```
+
+### How to move to another branch?
+```
+git branch
+git checkout <branch_name>
+git branch
+```
+
 ## Built With
 
 - Typescript
